@@ -1,8 +1,6 @@
 ﻿using System;
-using GarageApi.Business;
 using GarageApi.Business.Models;
 using GarageApi.Business.Repositories;
-using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal.Account.Manage;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GarageApi.Controllers
@@ -32,6 +30,15 @@ namespace GarageApi.Controllers
             var garage = _garageRepository.GetGarage(garageId);
 
             return Ok(garage);
+        }
+
+        [HttpGet]
+        [Route("{garageId}/{regNo}")]
+        public IActionResult GetVehicle(int garageId, string regNo)
+        {
+            var vehicle = _garageRepository.GetVehicle(garageId, regNo);
+
+            return vehicle != null ? (IActionResult) Ok(vehicle) : NotFound();
         }
 
         [HttpPost]

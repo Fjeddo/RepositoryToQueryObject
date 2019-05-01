@@ -6,6 +6,7 @@ namespace GarageApi.Business.Repositories
     {
         void CheckInVehicle(int garageId, Vehicle vehicle);
         void CheckOutVehicle(int garageId, string regNo);
-        object GetGarage(int garageId);
+        Garage GetGarage(int garageId);
+        Vehicle GetVehicle(int garageId, string regNo);
     }
 }

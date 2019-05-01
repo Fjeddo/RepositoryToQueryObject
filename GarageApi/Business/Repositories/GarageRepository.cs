@@ -2,7 +2,7 @@
 
 namespace GarageApi.Business.Repositories
 {
-    class GarageRepository : IGarageRepository
+    public class GarageRepository : IGarageRepository
     {
         public void CheckInVehicle(int garageId, Vehicle vehicle)
         {
@@ -14,7 +14,12 @@ namespace GarageApi.Business.Repositories
             throw new System.NotImplementedException();
         }
 
-        public object GetGarage(int garageId)
+        public Garage GetGarage(int garageId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Vehicle GetVehicle(int garageId, string regNo)
         {
             throw new System.NotImplementedException();
         }
