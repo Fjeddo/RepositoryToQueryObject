@@ -1,4 +1,4 @@
-﻿namespace GarageApi.Business.Models
+﻿namespace GarageApi.Business.Entities
 {
     public class Vehicle
     {

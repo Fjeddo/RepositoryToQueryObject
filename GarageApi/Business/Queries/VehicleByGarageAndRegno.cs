@@ -1,8 +1,9 @@
-﻿using GarageApi.Business.Models;
+﻿using System.Linq;
+using GarageApi.Business.Entities;
 
 namespace GarageApi.Business.Queries
 {
-    public class VehicleByGarageAndRegNo : IQuery<Vehicle>
+    public class VehicleByGarageAndRegNo : IQuery<Domain.Vehicle>
     {
         public int GarageId { get; }
         public string RegNo { get; }
@@ -13,9 +14,11 @@ namespace GarageApi.Business.Queries
             RegNo = regNo;
         }
 
-        public Vehicle Execute(IDataAccess dataAccess)
+        public Domain.Vehicle Execute(IDataAccess dataAccess)
         {
-            throw new System.NotImplementedException();
+            dynamic @object = dataAccess.Query<Vehicle>(v => v.RegNo == RegNo /*&& v.InGarage == GarageId*/, v => new {v.RegNo}).Single();
+
+            return new Domain.Vehicle(@object.RegNo);
         }
     }
 }

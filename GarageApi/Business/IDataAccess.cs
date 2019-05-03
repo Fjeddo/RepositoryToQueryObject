@@ -1,9 +1,10 @@
-﻿using GarageApi.Business.Queries;
+﻿using System;
+using System.Linq.Expressions;
 
 namespace GarageApi.Business
 {
     public interface IDataAccess
     {
-        T Query<T>(IQuery<T> query);
+        object[] Query<T>(Expression<Func<T, bool>> filter, Expression<Func<T, object>> selector) where T : class;
     }
 }

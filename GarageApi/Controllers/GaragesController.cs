@@ -1,9 +1,8 @@
 ﻿using System;
 using GarageApi.Business;
 using GarageApi.Business.Commands;
-using GarageApi.Business.Models;
+using GarageApi.Business.Entities;
 using GarageApi.Business.Queries;
-using GarageApi.Business.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 /// <summary>
@@ -15,7 +14,6 @@ namespace GarageApi.Controllers
     [ApiController]
     public class GaragesController : ControllerBase
     {
-        private readonly IGarageRepository _garageRepository;
         private readonly IDataAccess _dataAccess;
 
         public GaragesController(IDataAccess dataAccess)

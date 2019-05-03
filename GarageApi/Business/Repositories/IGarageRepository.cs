@@ -1,4 +1,4 @@
-﻿using GarageApi.Business.Models;
+﻿using GarageApi.Business.Entities;
 
 namespace GarageApi.Business.Repositories
 {
