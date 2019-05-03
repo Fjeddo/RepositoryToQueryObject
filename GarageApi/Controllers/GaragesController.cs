@@ -1,8 +1,14 @@
 ﻿using System;
+using GarageApi.Business;
+using GarageApi.Business.Commands;
 using GarageApi.Business.Models;
+using GarageApi.Business.Queries;
 using GarageApi.Business.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
+/// <summary>
+/// https://crosscuttingconcerns.com/CommandQuery-Object-pattern
+/// </summary>
 namespace GarageApi.Controllers
 {
     [Route("api/[controller]")]
@@ -10,10 +16,11 @@ namespace GarageApi.Controllers
     public class GaragesController : ControllerBase
     {
         private readonly IGarageRepository _garageRepository;
+        private readonly IDataAccess _dataAccess;
 
-        public GaragesController(IGarageRepository garageRepository)
+        public GaragesController(IDataAccess dataAccess)
         {
-            _garageRepository = garageRepository;
+            _dataAccess = dataAccess;
         }
 
         [HttpGet]
@@ -27,7 +34,8 @@ namespace GarageApi.Controllers
         [Route("{garageId}")]
         public IActionResult GetGarage(int garageId)
         {
-            var garage = _garageRepository.GetGarage(garageId);
+            var query = new GarageById(garageId);
+            var garage = query.Execute(_dataAccess);
 
             return Ok(garage);
         }
@@ -36,7 +44,8 @@ namespace GarageApi.Controllers
         [Route("{garageId}/{regNo}")]
         public IActionResult GetVehicle(int garageId, string regNo)
         {
-            var vehicle = _garageRepository.GetVehicle(garageId, regNo);
+            var query = new VehicleByGarageAndRegNo(garageId, regNo);
+            var vehicle = query.Execute(_dataAccess);
 
             return vehicle != null ? (IActionResult) Ok(vehicle) : NotFound();
         }
@@ -45,7 +54,8 @@ namespace GarageApi.Controllers
         [Route("{garageId}")]
         public IActionResult CheckInVehilce(int garageId, Vehicle vehicle)
         {
-            _garageRepository.CheckInVehicle(garageId, vehicle);
+            var command = new CheckInVehicle(garageId, vehicle.RegNo);
+            command.Execute(_dataAccess);
 
             return Ok();
         }
@@ -54,7 +64,8 @@ namespace GarageApi.Controllers
         [Route("{garageId}/{regNo}")]
         public IActionResult CheckOutVehicle(int garageId, string regNo)
         {
-            _garageRepository.CheckOutVehicle(garageId, regNo);
+            var command = new CheckOutVechicle(garageId, regNo);
+            command.Execute(_dataAccess);
 
             return Ok();
         }
