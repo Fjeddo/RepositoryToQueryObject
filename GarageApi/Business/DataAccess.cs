@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using GarageApi.Business.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace GarageApi.Business
@@ -11,5 +12,11 @@ namespace GarageApi.Business
         {
             return Set<T>().Where(filter).Select(selector).ToArray();
         }
+
+        public DbSet<Garage> Garages { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+
+        public DataAccess(DbContextOptions<DataAccess> options) : base(options)
+        {}
     }
 }

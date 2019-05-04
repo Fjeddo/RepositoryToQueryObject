@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using GarageApi.Business.Entities;
 
 namespace GarageApi.Business.Queries
@@ -14,9 +15,9 @@ namespace GarageApi.Business.Queries
 
         public Domain.Garage Execute(IDataAccess dataAccess)
         {
-            dynamic @object = dataAccess.Query<Garage>(g => g.Id == Id, g => new {g.Id, g.Name}).Single();
+            dynamic @object = dataAccess.Query<Garage>(g => g.Id == Id, g => new {g.Id, g.Name}).SingleOrDefault();
 
-            return new Domain.Garage(@object.Id, @object.Name);
+            return @object == null ? throw new KeyNotFoundException() : new Domain.Garage(@object.Id, @object.Name);
         }
     }
 }
