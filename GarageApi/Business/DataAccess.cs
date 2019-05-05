@@ -14,7 +14,6 @@ namespace GarageApi.Business
         }
 
         public DbSet<Garage> Garages { get; set; }
-        public DbSet<Vehicle> Vehicles { get; set; }
 
         public DataAccess(DbContextOptions<DataAccess> options) : base(options)
         {}

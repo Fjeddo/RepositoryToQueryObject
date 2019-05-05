@@ -33,6 +33,7 @@ namespace GarageApi.Controllers
         public IActionResult GetGarage(int garageId)
         {
             var query = new GarageById(garageId);
+            //var query = new GarageByIdNoVehicles(garageId);
             var garage = query.Execute(_dataAccess);
 
             return Ok(garage);

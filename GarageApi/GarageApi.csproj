@@ -6,6 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Business\Migrations\20190505105229_GarageVehicleRelationship.cs" />
+    <Compile Remove="Business\Migrations\20190505105229_GarageVehicleRelationship.Designer.cs" />
+    <Compile Remove="Business\Migrations\20190505113827_GarageVehicleRelationship.cs" />
+    <Compile Remove="Business\Migrations\20190505113827_GarageVehicleRelationship.Designer.cs" />
+    <Compile Remove="Business\Migrations\20190505121025_GarageVehicleRelationship2.cs" />
+    <Compile Remove="Business\Migrations\20190505121025_GarageVehicleRelationship2.Designer.cs" />
+    <Compile Remove="Business\Migrations\20190505123059_GarageVehicleRelationship2.cs" />
+    <Compile Remove="Business\Migrations\20190505123059_GarageVehicleRelationship2.Designer.cs" />
+    <Compile Remove="Business\Migrations\20190505123235_GarageVehicleRelationship2.cs" />
+    <Compile Remove="Business\Migrations\20190505123235_GarageVehicleRelationship2.Designer.cs" />
+    <Compile Remove="Business\Migrations\20190505123250_GarageVehicleRelationship3.cs" />
+    <Compile Remove="Business\Migrations\20190505123250_GarageVehicleRelationship3.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />

@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace GarageApi.Business.Queries
 {
-    public class GarageById : IQuery<Domain.Garage>
+    public class GarageByIdNoVehicles : IQuery<Domain.Garage>
     {
         public int Id { get; }
 
-        public GarageById(int id)
+        public GarageByIdNoVehicles(int id)
         {
             Id = id;
         }
@@ -17,15 +17,14 @@ namespace GarageApi.Business.Queries
         {
             dynamic @object = dataAccess.Query<Garage>(
                 g => g.Id == Id,
-                g => new {g.Id, g.Name, Vehicles = g.Vehicles.Select(v => v.RegNo).ToArray()}).SingleOrDefault();
+                g => new {g.Id, g.Name}).SingleOrDefault();
 
             if (@object == null)
             {
                 throw new KeyNotFoundException();
             }
 
-            var vehicles = ((IEnumerable<string>) @object.Vehicles)?.Select(regNo => new Domain.Vehicle(regNo));
-            var domainGarage = new Domain.Garage(@object.Id, @object.Name, vehicles);
+            var domainGarage = new Domain.Garage(@object.Id, @object.Name, null);
 
             return domainGarage;
 
